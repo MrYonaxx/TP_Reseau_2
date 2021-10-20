@@ -1,4 +1,5 @@
 #pragma once
+#include <vector>
 
 namespace uqac::serializer 
 {
@@ -6,7 +7,8 @@ namespace uqac::serializer
 	{
 
 	private:
-		//std::vector<>
+		std::vector<float> position;
+		
 		int index;
 
 	public:
