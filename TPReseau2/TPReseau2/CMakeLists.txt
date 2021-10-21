@@ -4,6 +4,6 @@
 cmake_minimum_required (VERSION 3.8)
 
 # Ajoutez une source à l'exécutable de ce projet.
-add_executable (TPReseau2 "TPReseau2.cpp" "TPReseau2.h" "Serializer.h" "Serializer.cpp" "Deserializer.h" "Deserializer.cpp")
+add_executable (TPReseau2 "TPReseau2.cpp" "TPReseau2.h" "Serializer.h" "Serializer.cpp" "Deserializer.h" "Deserializer.cpp" "IntCompressor.cpp")
 
 # TODO: Ajoutez des tests et installez des cibles si nécessaire.
