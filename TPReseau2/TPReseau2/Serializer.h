@@ -1,4 +1,5 @@
 #pragma once
+#include <iostream>
 #include <vector>
 
 namespace uqac::serializer 
@@ -7,9 +8,8 @@ namespace uqac::serializer
 	{
 
 	private:
-		std::vector<float> position;
-		
 		int index;
+		std::vector<char> buffer;
 
 	public:
 		Serializer();
@@ -18,5 +18,9 @@ namespace uqac::serializer
 		template <typename T>
 		void Serialize(T &data);
 
+	private:
+		void Write(const char* buff, size_t size);
+
 	};
+
 }
