@@ -23,10 +23,10 @@ namespace uqac::serializer
             
 	}
 
-    void IntCompressor::UnCompressor(int val)
+    int IntCompressor::UnCompressor(int val)
     {
         maxRange = max - min;
-        val -= maxRange;
+        return val - maxRange;
         
     }
 
