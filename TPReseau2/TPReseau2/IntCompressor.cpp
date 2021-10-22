@@ -21,7 +21,13 @@ namespace uqac::serializer
                 s.Serialize(newval);
             }
             
-            
-
 	}
+
+    void IntCompressor::UnCompressor(int val)
+    {
+        maxRange = max - min;
+        val -= maxRange;
+        
+    }
+
 }

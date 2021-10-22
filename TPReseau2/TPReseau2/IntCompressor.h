@@ -16,7 +16,8 @@ namespace uqac::serializer
 	public:
 
 		void Compressor(Serializer s, int val);
-		void UnCompression();
+		void UnCompressor(int val);
+		
 
 
 	};
