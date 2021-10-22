@@ -23,6 +23,7 @@ namespace uqac::serializer
 
 	void Serializer::Write(const char* buff, size_t size)
 	{
+		// On resize le buffe si pas assez grand
 		if (index + size > buffer.size())
 			buffer.resize(index + size);
 

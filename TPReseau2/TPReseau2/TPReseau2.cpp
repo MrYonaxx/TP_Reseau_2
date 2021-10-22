@@ -5,10 +5,33 @@
 #include <bitset>
 #include <string>
 
+#include "Player.h"
+
 using namespace std;
 
+int main()
+{
+    Player p;
+    p.Display();
 
-void IntToBinary(int n)
+    // On serialize
+    Serializer serializer(255);
+    p.Write(serializer);
+
+    p.Reset();
+
+    // On deserialize
+    /*Deserializer deserializer;
+    p.Read(deserializer);
+    p.Display();*/
+
+    return 0;
+}
+
+
+
+
+/*void IntToBinary(int n)
 {
     //permet d'avoir le nombre de chiffre de n
     int size = log10(n) + 1;
@@ -52,13 +75,6 @@ void StringToBinary(std::string s)
         cout << bitset<8>(s.c_str()[i]) << endl;
     }
 }
+*/
 
-int main()
-{
-	cout << "Hello CMake." << endl;
-    //IntToBinary(477777);
-    //FloatToBinary(5454.2634);
-    StringToBinary("dzauvbaeifn");
-	return 0;
-}
 
