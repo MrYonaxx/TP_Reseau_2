@@ -7,9 +7,9 @@ Player::Player()
 {
 	srand(time(NULL));
 	position = Vector3(rand() % 1000 - 500, rand() % 1000 - 500, rand() % 100);
-	//rotation = Quat(rand(), rand(), rand());
+	rotation = Quaternion(rand(), rand(), rand());
 	scale = Vector3(rand() % 10, rand() % 10, rand() % 10);
-	life = rand() % 300;
+	life = 300;// rand() % 300;
 	armor = rand() % 50;
 	money = rand() % (99999999*2) - 99999999;
 }
@@ -52,8 +52,8 @@ void Player::Write(Serializer& s)
 	IntCompressor lifeCompressor(0, 300);
 	lifeCompressor.Compressor(s, life);
 
-	IntCompressor armorCompressor(0, 50);
-	armorCompressor.Compressor(s, armor);
+	//IntCompressor armorCompressor(0, 50);
+	//armorCompressor.Compressor(s, armor);
 
 }
 
@@ -62,6 +62,6 @@ void Player::Read(Deserializer& s)
 	IntCompressor lifeCompressor(0, 300);
 	life = lifeCompressor.UnCompressor(s);
 
-	IntCompressor armorCompressor(0, 50);
-	armor = armorCompressor.UnCompressor(s);
+	//IntCompressor armorCompressor(0, 50);
+	//armor = armorCompressor.UnCompressor(s);
 }

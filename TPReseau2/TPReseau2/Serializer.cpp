@@ -29,17 +29,24 @@ namespace uqac::serializer
 	}
 
 
-	void Serializer::Write(char* buff, size_t size)
+	void Serializer::Write(const char* buff, size_t size)
 	{
-		//std::cout << '\n';
-		//std::cout << buff;
+		std::cout << '\n';
+		std::cout << size;
+		std::cout << '\n';
 
 
 		// On resize le buffe si pas assez grand
 		if (index + size > buffer.size())
 			buffer.resize(index + size);
+
 		std::memcpy(buffer.data() + index, &buff, size);
 		index += size;
+
+
+
+
+
 
 		//std::cout << '\n';
 		//std::cout << (uint16_t) buffer.data();

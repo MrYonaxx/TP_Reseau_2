@@ -26,11 +26,20 @@ namespace uqac::serializer
 	{
 		const size_t size = sizeof(data);
 
+
+		std::cout << '\n';
+		std::cout << size;
+		std::cout << '\n';
+
 		unsigned char buf[size];
 		std::memcpy(buf, buffer.data() + index, size);
 		index += size;
 
-		return (T)*buf;
+		std::cout << '\n';
+		std::cout << *(T*)buf;
+		std::cout << '\n';
+
+		return *(T*)buf;
 	}
 
 }

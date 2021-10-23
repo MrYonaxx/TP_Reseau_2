@@ -26,7 +26,7 @@ namespace uqac::serializer
 		int GetBufferSize();
 
 	private:
-		void Write(char* buff, size_t size);
+		void Write(const char* buff, size_t size);
 
 	};
 
@@ -35,9 +35,7 @@ namespace uqac::serializer
 		std::remove_reference_t<T>>>* = nullptr>
 	inline void Serializer::Serialize(T& data)
 	{
-		//size_t size = sizeof(data);
-
-		Write(reinterpret_cast<char*>(data), sizeof(data));
+		Write((const char*)(data), sizeof(data));
 	}
 
 
