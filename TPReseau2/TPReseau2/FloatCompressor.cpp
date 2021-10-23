@@ -3,6 +3,11 @@
 
 namespace uqac::serializer
 {
+	FloatCompressor::FloatCompressor(int min, int max)
+	{
+		this->min = min;
+		this->max = max;
+	}
 
 	void FloatCompressor::Compressor(Serializer s, float val)
 	{

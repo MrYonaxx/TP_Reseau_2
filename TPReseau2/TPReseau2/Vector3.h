@@ -14,7 +14,7 @@ public:
 	float x;
 	float y;
 	float z;
-
+	
 	Vector3()
 	{
 		this->x = 0;
@@ -28,4 +28,26 @@ public:
 		this->y = y;
 		this->z = z;
 	}
+
 };
+
+namespace uqac::serializer
+{
+	class Vector3Compressor
+	{
+
+	private:
+
+		int min;
+		int max;
+		int maxRange;
+
+	public:
+
+		void Compressor(Serializer s, Vector3 val);
+		Vector3 UnCompressor(Deserializer& s);
+
+
+
+	};
+}

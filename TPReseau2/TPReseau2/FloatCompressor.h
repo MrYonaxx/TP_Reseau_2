@@ -14,6 +14,8 @@ namespace uqac::serializer {
 
 	public:
 
+		FloatCompressor(int min, int max);
+
 		void Compressor(Serializer s, float val);
 		float UnCompressor(int val);
 	};
