@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Serializer.h"
+#include "Deserializer.h"
 
 namespace uqac::serializer
 {
@@ -15,8 +16,10 @@ namespace uqac::serializer
 
 	public:
 
-		void Compressor(Serializer s, int val);
-		int UnCompressor(int val);
+		IntCompressor(int min, int max);
+
+		void Compressor(Serializer& s, int val);
+		int UnCompressor(Deserializer& s);
 		
 
 

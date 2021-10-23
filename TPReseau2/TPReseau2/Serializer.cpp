@@ -1,5 +1,6 @@
 #include "Serializer.h"
 #include <iostream>
+#include <cstring>
 
 namespace uqac::serializer 
 {
@@ -14,21 +15,47 @@ namespace uqac::serializer
 		index = 0;
 	}
 
-	template<typename T>
-	void Serializer::Serialize(T& data)
+
+
+
+	std::vector<char> Serializer::GetBuffer()
 	{
-		size_t size = sizeof(data);
-		Write((char*)data, size)
+		return buffer;
 	}
 
-	void Serializer::Write(const char* buff, size_t size)
+	int Serializer::GetBufferSize()
 	{
+		return buffer.size();
+	}
+
+
+	void Serializer::Write(char* buff, size_t size)
+	{
+		//std::cout << '\n';
+		//std::cout << buff;
+
+
 		// On resize le buffe si pas assez grand
 		if (index + size > buffer.size())
 			buffer.resize(index + size);
-
-		std::memcpy(&buffer[index], buff, size);
+		std::memcpy(buffer.data() + index, &buff, size);
 		index += size;
+
+		//std::cout << '\n';
+		//std::cout << (uint16_t) buffer.data();
+		//std::cout << '\n';
+		//std::cout << "Size : " << buffer.size();
+
+		//unsigned char buf[2];
+		//std::memcpy(buf, buffer.data(), size);
+		/*for (size_t i = 0; i < size; ++i)
+		{
+			buf[i] = buffer[i];
+		}*/
+
+		//std::cout << '\n';
+		//std::cout << (uint16_t) *buf;
+		std::cout << '\n';
 	}
 }
 

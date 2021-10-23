@@ -21,9 +21,11 @@ int main()
     p.Reset();
 
     // On deserialize
-    /*Deserializer deserializer;
+    //std::cout << '\n';
+    //std::cout << serializer.GetBuffer()[0];
+    Deserializer deserializer(serializer.GetBuffer(), serializer.GetBufferSize());
     p.Read(deserializer);
-    p.Display();*/
+    p.Display();
 
     return 0;
 }

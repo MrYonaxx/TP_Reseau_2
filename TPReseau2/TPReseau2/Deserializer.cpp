@@ -5,21 +5,19 @@ namespace uqac::serializer
 	Deserializer::Deserializer(char buffer[], int sizebuffer)
 	{
 		index = 0;
-		//this->buffer = buffer[sizebuffer];
 	}
 
-	template<typename T>
-	T Deserializer::Read(T& data)
+	Deserializer::Deserializer(std::vector<char> buffer, int sizebuffer)
 	{
-		size_t size = sizeof(data);
+		index = 0;	
+		this->buffer = buffer;
 
-		unsigned char buf[size];
-		for (size_t i = 0; i < size; i++)
-		{	
-			buf[i] = buffer[index];
-			index += i;
-		}
-		return (T)buf;
+		std::cout << this->buffer[0];
+		/*for (size_t i = 0; i < sizebuffer; i++)
+		{
+			this->buffer[i] = buffer[i];
+		}*/
 	}
+
 }
 

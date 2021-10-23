@@ -1,7 +1,7 @@
 #include "Player.h"
 #include <stdlib.h>  
 #include <time.h>   
-
+#include "IntCompressor.h"  
 
 Player::Player()
 {
@@ -49,9 +49,19 @@ void Player::Display()
 
 void Player::Write(Serializer& s)
 {
+	IntCompressor lifeCompressor(0, 300);
+	lifeCompressor.Compressor(s, life);
+
+	IntCompressor armorCompressor(0, 50);
+	armorCompressor.Compressor(s, armor);
 
 }
 
 void Player::Read(Deserializer& s)
 {
+	IntCompressor lifeCompressor(0, 300);
+	life = lifeCompressor.UnCompressor(s);
+
+	IntCompressor armorCompressor(0, 50);
+	armor = armorCompressor.UnCompressor(s);
 }
