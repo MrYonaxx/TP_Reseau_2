@@ -16,6 +16,7 @@ namespace uqac::serializer
 
 	public:
 
+		IntCompressor() = default;
 		IntCompressor(int min, int max);
 
 		void Compressor(Serializer& s, int val);
