@@ -42,6 +42,7 @@ namespace uqac::serializer
 		Write((const char*)(data), sizeof(data));
 	}
 
+	// Ne serialize que les chaines de caractères, les autres tableaux ne fonctionne pas
 	template <typename T, size_t size>
 	inline void Serializer::Serialize(T(&data)[size])
 	{

@@ -4,6 +4,7 @@
 #include "Deserializer.h"
 #include "Vector3.h"
 #include "Quaternion.h"
+#include "IntCompressor.h"
 
 namespace uqac::serializer {
 
@@ -11,6 +12,7 @@ namespace uqac::serializer {
 
 	private:
 		Vector3Compressor vectComp;
+		IntCompressor intComp;
 
 	public:
 

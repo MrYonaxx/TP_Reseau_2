@@ -14,11 +14,11 @@ Player::Player()
 	float r = (float) rand() / RAND_MAX;
 	position = Vector3((rand() % 1000 - 500) + r, (rand() % 1000 - 500) + r, (rand() % 100) + r);
 
-	float rX = (float)rand() / RAND_MAX;
-	float rY = (float)rand() / RAND_MAX;
-	float rZ = (float)rand() / RAND_MAX;
-	float rW = (float)rand() / RAND_MAX;
-	rotation = Quaternion(rX, rY, rZ, rW);
+	// Rotation 20 / 60 / 50
+	//rotation = Quaternion(0.3443928, 0.3827146, 0.2817484, 0.8096548);
+
+	// Rotation -80 / 90 / 0
+	rotation = Quaternion(-0.4545195, 0.5416753, 0.4545195, 0.5416753);
 
 	scale = Vector3(rand() % 10, rand() % 10, rand() % 10);
 
@@ -108,7 +108,7 @@ void Player::Read(Deserializer& s)
 	money = moneyCompressor.UnCompressor(s);
 
 	QuaternionCompressor rotationCompressor;
-	rotationCompressor.UnCompressor(s);
+	rotation = rotationCompressor.UnCompressor(s);
 
 	char* n = s.Read(128);
 	std::copy(n, n + 128, name);

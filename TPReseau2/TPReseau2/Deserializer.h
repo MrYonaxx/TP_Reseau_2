@@ -34,6 +34,7 @@ namespace uqac::serializer
 		return *(T*)buf;
 	}
 
+	// Pour read les string
 	inline char* Deserializer::Read(size_t size)
 	{
 		char* buf = new char[size];
