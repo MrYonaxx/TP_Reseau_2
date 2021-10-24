@@ -11,20 +11,21 @@ namespace uqac::serializer
 
     void IntCompressor::Compressor(Serializer& s, int val)
 	{
-            maxRange = max - min;
-            
-            if (maxRange <= 255) {
-                uint8_t newval = val - min;
-                s.Serialize(newval);
-            }
-            else if(maxRange <= 65535) {
-                uint16_t newval = val - min;
-                s.Serialize(newval);
-            }
-            else if (maxRange <= 4294967295) {
-                uint32_t newval = val - min;
-                s.Serialize(newval);
-            }
+        maxRange = max - min;
+        
+        // En fonction de la max Range on serialize un uint correspondant
+        if (maxRange <= 255) {
+            uint8_t newval = val - min;
+            s.Serialize(newval);
+        }
+        else if(maxRange <= 65535) {
+            uint16_t newval = val - min;
+            s.Serialize(newval);
+        }
+        else if (maxRange <= 4294967295) {
+            uint32_t newval = val - min;
+            s.Serialize(newval);
+        }
             
 	}
 
@@ -32,6 +33,8 @@ namespace uqac::serializer
     int IntCompressor::UnCompressor(Deserializer& s)
     {
         maxRange = max - min;
+
+        // En fonction de la max Range on deserialize un uint correspondant
         int res;
         if (maxRange <= 255)
             res = (int) s.Read<uint8_t>() + min;

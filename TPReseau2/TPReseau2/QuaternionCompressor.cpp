@@ -11,7 +11,6 @@ namespace uqac::serializer
 
 	void QuaternionCompressor::Compressor(Serializer& s, Quaternion quaternion) 
 	{
-		float sign = 0;
 		float index = 0;
 		float x = std::abs(quaternion.x);
 		float y = std::abs(quaternion.y);
@@ -19,29 +18,17 @@ namespace uqac::serializer
 		float w = std::abs(quaternion.w);
 
 		// On cherche la plus grande valeure du quaternion
-		// Et on stock le sign de la plus grande valeure
+		// Et on stock le signe de la plus grande valeure
 		if (x > y) 
-		{
 			index = 0; 
-			sign = (x < 0) ? -1 : 1;
-		}
 		else 
-		{
 			index = 1; 
-			sign = (y < 0) ? -1 : 1;
-		}
 		float max = std::max(x, y);
 		if (z > max) 
-		{
 			index = 2; 
-			sign = (z < 0) ? -1 : 1;
-		}
 		max = std::max(max, z);
 		if (w > max) 
-		{
 			index = 3;
-			sign = (w < 0) ? -1 : 1;
-		}
 		max = std::max(max, w);
 
 		// On encode les 3 autres valeurs du quaternion (celle pas absolu)
@@ -72,7 +59,7 @@ namespace uqac::serializer
 		}
 
 		intComp.Compressor(s, index);
-		vectComp.Compressor(s, Vector3(a * sign, b * sign, c * sign));
+		vectComp.Compressor(s, Vector3(a, b, c));
 	}
 
 	Quaternion QuaternionCompressor::UnCompressor(Deserializer& s) 

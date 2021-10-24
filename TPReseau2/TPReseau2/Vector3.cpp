@@ -12,6 +12,7 @@ namespace uqac::serializer
 
 	void Vector3Compressor::Compressor(Serializer& s, Vector3 val)
 	{
+		// On compresse les 3 float du vecteur avec un float compresseur
 		FloatCompressor floatCompX(min.x, max.x, precision);
 		floatCompX.Compressor(s, val.x);
 

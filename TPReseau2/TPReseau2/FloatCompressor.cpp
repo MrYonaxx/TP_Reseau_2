@@ -13,6 +13,7 @@ namespace uqac::serializer
 
 	void FloatCompressor::Compressor(Serializer& s, float val)
 	{
+		// On transforme le float en int en fonction de la precision 
 		int valInt = (int)(val * pow(10, precision)); 
 
 		intComp.Compressor(s, valInt);
