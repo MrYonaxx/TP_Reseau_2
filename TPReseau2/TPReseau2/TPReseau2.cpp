@@ -20,12 +20,13 @@ int main()
 
     p.Reset();
 
+    std::cout << "\n________________________________________\n";
     // On deserialize
-    //std::cout << '\n';
-    //std::cout << serializer.GetBuffer()[0];
     Deserializer deserializer(serializer.GetBuffer(), serializer.GetBufferSize());
     p.Read(deserializer);
     p.Display();
+
+    std::cout << "\n________________________________________\n";
 
     return 0;
 }

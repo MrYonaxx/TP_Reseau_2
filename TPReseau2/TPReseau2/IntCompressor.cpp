@@ -33,18 +33,12 @@ namespace uqac::serializer
     {
         maxRange = max - min;
         int res;
-        if (maxRange <= 255) {
-            uint8_t a;
-            res = (int) s.Read(a) + min;
-        }
-        else if (maxRange <= 65535) {
-            uint16_t b;
-            res = (int) s.Read(b) + min;
-        }
-        else if (maxRange <= 4294967295) {
-            uint32_t c;
-            res = (int) s.Read(c) + min;
-        }
+        if (maxRange <= 255)
+            res = (int) s.Read<uint8_t>() + min;
+        else if (maxRange <= 65535) 
+            res = (int) s.Read<uint16_t>() + min;
+        else if (maxRange <= 4294967295) 
+            res = (int) s.Read<uint32_t>() + min;
 
         return res;
 

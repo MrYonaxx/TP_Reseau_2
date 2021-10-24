@@ -3,35 +3,40 @@
 
 namespace uqac::serializer
 {
-	 Vector3Compressor::Vector3Compressor(Vector3 min, Vector3 max)
+	Vector3Compressor::Vector3Compressor(Vector3 min, Vector3 max, int precision)
 	{
 		 this->min = min;
 		 this->max = max;
+		 this->precision = precision;
 	}
 
 	void Vector3Compressor::Compressor(Serializer& s, Vector3 val)
 	{
-		FloatCompressor floatComp(min.x, max.x, precision);
-		floatComp.Compressor(s, val.x);
+		FloatCompressor floatCompX(min.x, max.x, precision);
+		floatCompX.Compressor(s, val.x);
 
-		FloatCompressor floatComp(min.y, max.y, precision);
-		floatComp.Compressor(s, val.y);
+		FloatCompressor floatCompY(min.y, max.y, precision);
+		floatCompY.Compressor(s, val.y);
 
-		FloatCompressor floatComp(min.z, max.z, precision);
-		floatComp.Compressor(s, val.z);
+		FloatCompressor floatCompZ(min.z, max.z, precision);
+		floatCompZ.Compressor(s, val.z);
 		
 	}
 
 	Vector3 Vector3Compressor::UnCompressor(Deserializer& s)
 	{
-		FloatCompressor floatComp(min.x, max.x, precision);
-		floatComp.UnCompressor(s);
+		Vector3 res;
 
-		FloatCompressor floatComp(min.y, max.y, precision);
-		floatComp.UnCompressor(s);
+		FloatCompressor floatCompX(min.x, max.x, precision);
+		res.x = floatCompX.UnCompressor(s);
 
-		FloatCompressor floatComp(min.z, max.z, precision);
-		floatComp.UnCompressor(s);
+		FloatCompressor floatCompY(min.y, max.y, precision);
+		res.y = floatCompY.UnCompressor(s);
+
+		FloatCompressor floatCompZ(min.z, max.z, precision);
+		res.z = floatCompZ.UnCompressor(s);
+
+		return res;
 	}
 
 	

@@ -18,8 +18,8 @@ public:
 	Vector3 scale; // 3 de précision
 	int life; // 0 à 300
 	int armor; // 0 à 50
-	int money; // -99 999 999 à 99 999 999
-	char name[128];
+	float money; // -99 999,99 à 99 999,99
+	char name[128] = "";
 
 public:
 	Player();

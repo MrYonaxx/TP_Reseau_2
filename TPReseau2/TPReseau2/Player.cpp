@@ -2,16 +2,28 @@
 #include <stdlib.h>  
 #include <time.h>   
 #include "IntCompressor.h"  
+#include "FloatCompressor.h"  
 
 Player::Player()
 {
+	char* n = "Schnell";
+	std::copy(n, n + 7, name);
+
 	srand(time(NULL));
-	position = Vector3(rand() % 1000 - 500, rand() % 1000 - 500, rand() % 100);
-	rotation = Quaternion(rand(), rand(), rand());
+	float r = (float) rand() / RAND_MAX;
+	position = Vector3((rand() % 1000 - 500) + r, (rand() % 1000 - 500) + r, (rand() % 100) + r);
+
+	float rX = (float)rand() / RAND_MAX;
+	float rY = (float)rand() / RAND_MAX;
+	float rZ = (float)rand() / RAND_MAX;
+	float rW = (float)rand() / RAND_MAX;
+	rotation = Quaternion(rX, rY, rZ, rW);
+
 	scale = Vector3(rand() % 10, rand() % 10, rand() % 10);
-	life = 300;// rand() % 300;
+
+	life =  rand() % 300;
 	armor = rand() % 50;
-	money = rand() % (99999999*2) - 99999999;
+	money = (rand() % 200000 - 100000) + r;
 }
 
 void Player::Reset()
@@ -23,6 +35,7 @@ void Player::Reset()
 	rotation.x = 0;
 	rotation.y = 0;
 	rotation.z = 0;
+	rotation.w = 0;
 
 	scale.x = 0;
 	scale.y = 0;
@@ -31,6 +44,9 @@ void Player::Reset()
 	life = 0;
 	armor = 0;
 	money = 0;
+
+	char n[128] = " ";
+	std::copy(n, n + 128, name);
 
 }
 
@@ -41,6 +57,7 @@ void Player::Display()
 	std::cout << "\nPosition : " << position.x << " " << position.y << " " << position.z;
 	std::cout << "\nRotation : " << rotation.x << " " << rotation.y << " " << rotation.z << " " << rotation.w;
 	std::cout << "\nScale : "    << scale.x << " " << scale.y << " " << scale.z;
+	std::cout << '\n';
 	std::cout << "\nLife : " << life;
 	std::cout << "\nArmor : " << armor;
 	std::cout << "\nMoney : " << money;
@@ -49,19 +66,44 @@ void Player::Display()
 
 void Player::Write(Serializer& s)
 {
+	Vector3Compressor posCompressor(Vector3(-500, -500, 0), Vector3(500, 500, 100), 3);
+	posCompressor.Compressor(s, position);
+
+	Vector3Compressor scaleCompressor(Vector3(-500, -500, 0), Vector3(500, 500, 100), 3);
+	scaleCompressor.Compressor(s, scale);
+
 	IntCompressor lifeCompressor(0, 300);
 	lifeCompressor.Compressor(s, life);
 
-	//IntCompressor armorCompressor(0, 50);
-	//armorCompressor.Compressor(s, armor);
+	IntCompressor armorCompressor(0, 50);
+	armorCompressor.Compressor(s, armor);
+
+	FloatCompressor moneyCompressor(-99999.99, 99999.99, 3);
+	moneyCompressor.Compressor(s, money);
+
+
+	s.Serialize(name);
 
 }
 
 void Player::Read(Deserializer& s)
 {
+	Vector3Compressor posCompressor(Vector3(-500, -500, 0), Vector3(500, 500, 100), 3);
+	position = posCompressor.UnCompressor(s);
+
+	Vector3Compressor scaleCompressor(Vector3(-500, -500, 0), Vector3(500, 500, 100), 3);
+	scale = scaleCompressor.UnCompressor(s);
+
 	IntCompressor lifeCompressor(0, 300);
 	life = lifeCompressor.UnCompressor(s);
 
-	//IntCompressor armorCompressor(0, 50);
-	//armor = armorCompressor.UnCompressor(s);
+	IntCompressor armorCompressor(0, 50);
+	armor = armorCompressor.UnCompressor(s);
+
+	FloatCompressor moneyCompressor(-99999.99f, 99999.99f, 3);
+	money = moneyCompressor.UnCompressor(s);
+
+	char* n = s.Read(128);
+	std::copy(n, n + 128, name);
+	free(n);
 }

@@ -22,11 +22,15 @@ namespace uqac::serializer
 			std::remove_reference_t<T>>>* = nullptr>
 		void Serialize(T& data);
 
+		template <typename T, size_t size>
+		void Serialize(T(&data)[size]);
+
 		std::vector<char> GetBuffer();
 		int GetBufferSize();
 
 	private:
 		void Write(const char* buff, size_t size);
+		void WriteString(const char* buff, size_t size);
 
 	};
 
@@ -36,6 +40,12 @@ namespace uqac::serializer
 	inline void Serializer::Serialize(T& data)
 	{
 		Write((const char*)(data), sizeof(data));
+	}
+
+	template <typename T, size_t size>
+	inline void Serializer::Serialize(T(&data)[size])
+	{
+		WriteString((const char*)(data), sizeof(data));
 	}
 
 

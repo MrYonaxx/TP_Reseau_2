@@ -17,29 +17,30 @@ namespace uqac::serializer
 		Deserializer(std::vector<char> buffer, int sizebuffer);
 
 		template <typename T>
-		T Read(T& data);
+		T Read();
+		char* Read(size_t size);
 
 	};
 
 	template<typename T>
-	inline T Deserializer::Read(T& data)
+	inline T Deserializer::Read()
 	{
-		const size_t size = sizeof(data);
-
-
-		std::cout << '\n';
-		std::cout << size;
-		std::cout << '\n';
+		const size_t size = sizeof(T);
 
 		unsigned char buf[size];
 		std::memcpy(buf, buffer.data() + index, size);
 		index += size;
 
-		std::cout << '\n';
-		std::cout << *(T*)buf;
-		std::cout << '\n';
-
 		return *(T*)buf;
+	}
+
+	inline char* Deserializer::Read(size_t size)
+	{
+		char* buf = new char[size];
+		std::memcpy(buf, buffer.data() + index, size);
+		index += size;
+
+		return buf;
 	}
 
 }

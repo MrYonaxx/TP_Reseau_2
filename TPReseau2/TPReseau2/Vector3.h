@@ -7,7 +7,8 @@ struct Vector3<T>
 	public T y;
 	public T z;
 };*/
-
+#include "Serializer.h"
+#include "Deserializer.h"
 
 namespace uqac::serializer
 {
@@ -17,8 +18,6 @@ namespace uqac::serializer
 		float x;
 		float y;
 		float z;
-
-
 
 		Vector3()
 		{
@@ -47,7 +46,7 @@ namespace uqac::serializer
 
 	public:
 
-		Vector3Compressor(Vector3 min, Vector3 max);
+		Vector3Compressor(Vector3 min, Vector3 max, int precision);
 
 		void Compressor(Serializer& s, Vector3 val);
 		Vector3 UnCompressor(Deserializer& s);
