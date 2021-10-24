@@ -46,6 +46,7 @@ namespace uqac::serializer
 
 	public:
 
+		Vector3Compressor() = default;
 		Vector3Compressor(Vector3 min, Vector3 max, int precision);
 
 		void Compressor(Serializer& s, Vector3 val);

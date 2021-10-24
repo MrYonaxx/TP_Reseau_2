@@ -3,6 +3,7 @@
 #include <time.h>   
 #include "IntCompressor.h"  
 #include "FloatCompressor.h"  
+#include "QuaternionCompressor.h"
 
 Player::Player()
 {
@@ -81,6 +82,9 @@ void Player::Write(Serializer& s)
 	FloatCompressor moneyCompressor(-99999.99, 99999.99, 3);
 	moneyCompressor.Compressor(s, money);
 
+	QuaternionCompressor rotationCompressor;
+	rotationCompressor.Compressor(s, rotation);
+
 
 	s.Serialize(name);
 
@@ -102,6 +106,9 @@ void Player::Read(Deserializer& s)
 
 	FloatCompressor moneyCompressor(-99999.99f, 99999.99f, 3);
 	money = moneyCompressor.UnCompressor(s);
+
+	QuaternionCompressor rotationCompressor;
+	rotationCompressor.UnCompressor(s);
 
 	char* n = s.Read(128);
 	std::copy(n, n + 128, name);
